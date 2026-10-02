@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Book Appointment | CarePlus Hospital</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">+</div>
+
+        <div>
+            <strong>CarePlus</strong>
+            <small>HOSPITAL</small>
+        </div>
+
+    </div>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="doctors.html">Doctors</a>
+        <a href="contact.html">Contact</a>
+
+    </nav>
+
+</header>
+
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <span>ONLINE APPOINTMENT</span>
+
+        <h2>Book a Medical Consultation</h2>
+
+        <p>
+            Complete the form below and our team will
+            contact you to confirm your appointment.
+        </p>
+
+    </div>
+
+
+    <form
+        style="
+        max-width:800px;
+        margin:auto;
+        padding:40px;
+        border:1px solid #d9e8eb;
+        border-radius:20px;
+        "
+    >
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+
+            <div>
+
+                <label>Full Name</label>
+
+                <input
+                    type="text"
+                    placeholder="Enter your name"
+                    required
+                    style="
+                    width:100%;
+                    padding:15px;
+                    margin-top:8px;
+                    border:1px solid #d9e8eb;
+                    border-radius:8px;
+                    "
+                >
+
+            </div>
+
+
+            <div>
+
+                <label>Phone Number</label>
+
+                <input
+                    type="tel"
+                    placeholder="+256..."
+                    required
+                    style="
+                    width:100%;
+                    padding:15px;
+                    margin-top:8px;
+                    border:1px solid #d9e8eb;
+                    border-radius:8px;
+                    "
+                >
+
+            </div>
+
+        </div>
+
+
+        <br>
+
+
+        <label>Email Address</label>
+
+        <input
+            type="email"
+            placeholder="your@email.com"
+            required
+            style="
+            width:100%;
+            padding:15px;
+            margin-top:8px;
+            border:1px solid #d9e8eb;
+            border-radius:8px;
+            "
+        >
+
+
+        <br><br>
+
+
+        <label>Select Department</label>
+
+        <select
+            required
+            style="
+            width:100%;
+            padding:15px;
+            margin-top:8px;
+            border:1px solid #d9e8eb;
+            border-radius:8px;
+            "
+        >
+
+            <option value="">Choose a department</option>
+
+            <option>General Medicine</option>
+            <option>Cardiology</option>
+            <option>Pediatrics</option>
+            <option>Neurology</option>
+            <option>Dental Care</option>
+            <option>Laboratory</option>
+
+        </select>
+
+
+        <br><br>
+
+
+        <label>Preferred Doctor</label>
+
+        <select
+            style="
+            width:100%;
+            padding:15px;
+            margin-top:8px;
+            border:1px solid #d9e8eb;
+            border-radius:8px;
+            "
+        >
+
+            <option>Select Doctor</option>
+
+            <option>Dr. James Carter</option>
+
+            <option>Dr. Sarah Williams</option>
+
+            <option>Dr. Michael Brown</option>
+
+        </select>
+
+
+        <br><br>
+
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+
+            <div>
+
+                <label>Appointment Date</label>
+
+                <input
+                    type="date"
+                    required
+                    style="
+                    width:100%;
+                    padding:15px;
+                    margin-top:8px;
+                    border:1px solid #d9e8eb;
+                    border-radius:8px;
+                    "
+                >
+
+            </div>
+
+
+            <div>
+
+                <label>Preferred Time</label>
+
+                <input
+                    type="time"
+                    required
+                    style="
+                    width:100%;
+                    padding:15px;
+                    margin-top:8px;
+                    border:1px solid #d9e8eb;
+                    border-radius:8px;
+                    "
+                >
+
+            </div>
+
+        </div>
+
+
+        <br>
+
+
+        <label>Reason for Consultation</label>
+
+        <textarea
+            rows="5"
+            placeholder="Briefly describe your concern..."
+            style="
+            width:100%;
+            padding:15px;
+            margin-top:8px;
+            border:1px solid #d9e8eb;
+            border-radius:8px;
+            "
+        ></textarea>
+
+
+        <br><br>
+
+
+        <button
+            type="submit"
+            class="primary-btn"
+            style="border:none;cursor:pointer;"
+        >
+
+            Confirm Appointment →
+
+        </button>
+
+    </form>
+
+</section>
+
+
+<footer>
+
+    <div class="copyright">
+
+        <p>
+            © 2026 CarePlus Hospital
+        </p>
+
+    </div>
+
+</footer>
+
+</body>
+
+</html>
