@@ -1,25 +1,91 @@
-* {
+/* ==========================================================
+   CarePlus Hospital - style.css
+   ========================================================== */
+
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* ---------- THEME TOKENS ----------
+   Every colour that changes in dark mode is a variable, so
+   body.dark only has to redefine them (no per-component rules). */
 :root {
+    /* brand */
     --primary: #087f8c;
+    --primary-hover: #066b76;
+    --primary-text: #087f8c;      /* primary used as TEXT colour */
     --secondary: #00a8a8;
-    --dark: #102a43;
-    --text: #486581;
-    --light: #f5fbfc;
-    --white: #ffffff;
+    --dark: #102a43;              /* fixed navy (top bar) */
+
+    /* surfaces */
+    --bg: #ffffff;
+    --surface: #ffffff;           /* cards, navbar */
+    --soft: #f5fbfc;              /* alternating sections */
+    --tile: #edf7f8;              /* placeholders, icon buttons */
+    --raised: #ffffff;            /* floating card on hero */
     --border: #d9e8eb;
+
+    /* text */
+    --heading: #102a43;
+    --text: #486581;
+
+    /* hero */
+    --hero-a: #eaf9fa;
+    --hero-b: #f8ffff;
+    --visual-a: #bcecef;
+    --visual-b: #e9fbfc;
+
+    /* emergency */
+    --danger: #d62828;
+    --danger-hover: #b81f1f;
+    --danger-bg: #fff4f4;
+    --danger-border: #ffd0d0;
+
+    --shadow: rgba(16, 42, 67, .12);
+    --radius: 15px;
+}
+
+body.dark {
+    color-scheme: dark;
+    --bg: #071923;
+    --surface: #0c2530;
+    --soft: #0c2530;
+    --tile: #102f3b;
+    --raised: #102f3b;
+    --border: #183b47;
+    --heading: #ffffff;
+    --text: #b8cbd1;
+    --primary-text: #4fd1dc;      /* lighter teal: readable on dark */
+    --hero-a: #0c2530;
+    --hero-b: #0a202b;
+    --visual-a: #123846;
+    --visual-b: #0f2d3a;
+    --danger-bg: #2a1518;
+    --danger-border: #5a2a2e;
+    --shadow: rgba(0, 0, 0, .4);
+}
+
+html {
+    scroll-padding-top: 100px;    /* anchors don't hide under sticky navbar */
 }
 
 body {
-    font-family: "Inter", sans-serif;
-    color: var(--dark);
-    background: var(--white);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--heading);
+    background: var(--bg);
     line-height: 1.6;
-    transition: 0.3s;
+    transition: background-color .3s, color .3s;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
 
 a {
@@ -27,24 +93,86 @@ a {
     color: inherit;
 }
 
+address {
+    font-style: normal;
+}
 
-/* TOP BAR */
+ul {
+    list-style: none;
+}
+
+
+/* ---------- ACCESSIBILITY ---------- */
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 3000;
+    background: #fff;
+    color: #000;
+    padding: 12px 16px;
+    border-radius: 0 0 8px 0;
+    font-weight: 700;
+}
+
+.skip-link:focus {
+    left: 0;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+:focus-visible {
+    outline: 3px solid var(--primary-text);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* ---------- TOP BAR ---------- */
 
 .topbar {
     background: var(--dark);
-    color: white;
+    color: #fff;
     padding: 10px 7%;
     display: flex;
     justify-content: space-between;
+    gap: 10px;
     font-size: 13px;
 }
 
+.topbar a,
 .topbar span {
     margin-right: 25px;
 }
 
+.topbar a:hover {
+    text-decoration: underline;
+}
 
-/* NAVBAR */
+.topbar > div:last-child span {
+    margin-right: 0;
+}
+
+
+/* ---------- NAVBAR ---------- */
 
 .navbar {
     height: 80px;
@@ -52,11 +180,12 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: white;
+    background: var(--surface);
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
     z-index: 1000;
+    transition: background-color .3s, border-color .3s;
 }
 
 .logo {
@@ -68,19 +197,20 @@ a {
 .logo strong {
     display: block;
     font-size: 20px;
+    line-height: 1.2;
 }
 
 .logo small {
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 3px;
-    color: var(--primary);
+    color: var(--primary-text);
 }
 
 .logo-icon {
     width: 40px;
     height: 40px;
     background: var(--primary);
-    color: white;
+    color: #fff;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -89,20 +219,22 @@ a {
     font-weight: bold;
 }
 
-nav {
+/* Scoped to the header: a bare `nav` rule also hit the footer navs */
+.navbar nav {
     display: flex;
     gap: 28px;
 }
 
-nav a {
+.navbar nav a {
     color: var(--text);
     font-size: 14px;
     font-weight: 600;
+    transition: color .2s;
 }
 
-nav a:hover,
-nav a.active {
-    color: var(--primary);
+.navbar nav a:hover,
+.navbar nav a.active {
+    color: var(--primary-text);
 }
 
 .nav-buttons {
@@ -111,36 +243,90 @@ nav a.active {
     align-items: center;
 }
 
-.theme-btn {
+.theme-btn,
+.menu-toggle {
     border: none;
-    background: #edf7f8;
-    padding: 10px;
+    background: var(--tile);
+    color: var(--heading);
+    min-width: 40px;
+    height: 40px;
+    padding: 0 10px;
     border-radius: 8px;
+    font-size: 16px;
+    line-height: 1;
     cursor: pointer;
+    transition: background-color .3s;
+}
+
+.menu-toggle {
+    display: none;               /* shown on tablet/mobile */
 }
 
 .appointment-btn {
     background: var(--primary);
-    color: white;
+    color: #fff;
     padding: 12px 20px;
     border-radius: 8px;
     font-size: 13px;
     font-weight: 700;
+    transition: background-color .2s;
+}
+
+.appointment-btn:hover {
+    background: var(--primary-hover);
 }
 
 
-/* HERO */
+/* ---------- BUTTONS ---------- */
+
+.primary-btn,
+.secondary-btn,
+.white-btn {
+    display: inline-block;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: background-color .2s, color .2s, transform .2s;
+}
+
+.primary-btn:hover,
+.secondary-btn:hover,
+.white-btn:hover {
+    transform: translateY(-2px);
+}
+
+.primary-btn {
+    background: var(--primary);
+    color: #fff;
+}
+
+.primary-btn:hover {
+    background: var(--primary-hover);
+}
+
+.secondary-btn {
+    border: 1px solid var(--primary-text);
+    color: var(--primary-text);
+}
+
+.secondary-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
+.white-btn {
+    background: #fff;
+    color: var(--primary);
+}
+
+
+/* ---------- HERO ---------- */
 
 .hero {
     min-height: 650px;
-    background: linear-gradient(
-        135deg,
-        #eaf9fa,
-        #f8ffff
-    );
-
+    background: linear-gradient(135deg, var(--hero-a), var(--hero-b));
     padding: 80px 7%;
-
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
@@ -149,20 +335,20 @@ nav a.active {
 
 .hero-label {
     display: inline-block;
-    color: var(--primary);
+    color: var(--primary-text);
     font-size: 13px;
     font-weight: 700;
     margin-bottom: 20px;
 }
 
 .hero h1 {
-    font-size: 64px;
+    font-size: clamp(2.6rem, 6vw, 4rem);
     line-height: 1.05;
     margin-bottom: 25px;
 }
 
 .hero h1 span {
-    color: var(--primary);
+    color: var(--primary-text);
 }
 
 .hero p {
@@ -174,52 +360,32 @@ nav a.active {
 
 .hero-buttons {
     display: flex;
+    flex-wrap: wrap;
     gap: 15px;
-}
-
-.primary-btn,
-.secondary-btn {
-    display: inline-block;
-    padding: 14px 23px;
-    border-radius: 8px;
-    font-weight: 700;
-}
-
-.primary-btn {
-    background: var(--primary);
-    color: white;
-}
-
-.secondary-btn {
-    border: 1px solid var(--primary);
-    color: var(--primary);
 }
 
 .hero-features {
     display: flex;
-    gap: 45px;
+    flex-wrap: wrap;
+    gap: 20px 45px;
     margin-top: 45px;
 }
 
 .hero-features strong {
     display: block;
     font-size: 25px;
-    color: var(--primary);
+    color: var(--primary-text);
 }
 
 .hero-features span {
     color: var(--text);
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .hero-image {
     min-height: 450px;
     border-radius: 30px;
-    background: linear-gradient(
-        145deg,
-        #bcecef,
-        #e9fbfc
-    );
+    background: linear-gradient(145deg, var(--visual-a), var(--visual-b));
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -231,33 +397,35 @@ nav a.active {
     bottom: 30px;
     left: 30px;
     right: 30px;
-    background: white;
+    background: var(--raised);
     padding: 20px;
-    border-radius: 15px;
+    border-radius: var(--radius);
     display: flex;
     align-items: center;
     gap: 15px;
-    box-shadow: 0 15px 40px rgba(0,0,0,.12);
+    box-shadow: 0 15px 40px var(--shadow);
 }
 
 .doctor-avatar {
     font-size: 50px;
+    line-height: 1;
 }
 
 .doctor-card p {
     margin: 0;
     font-size: 12px;
+    color: var(--text);
 }
 
 
-/* QUICK SERVICES */
+/* ---------- QUICK SERVICES ---------- */
 
 .quick-services {
     padding: 25px 7%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
-    background: white;
+    background: var(--bg);
 }
 
 .quick-card {
@@ -265,15 +433,23 @@ nav a.active {
     gap: 15px;
     align-items: center;
     padding: 20px;
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.quick-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px var(--shadow);
 }
 
 .quick-card > span {
     font-size: 30px;
+    line-height: 1;
 }
 
-.quick-card h3 {
+.quick-card h2 {                 /* was h3 before the heading-order fix */
     font-size: 14px;
 }
 
@@ -282,13 +458,13 @@ nav a.active {
     color: var(--text);
 }
 
-.emergency {
-    background: #fff4f4;
-    border-color: #ffd0d0;
+.quick-card.emergency {
+    background: var(--danger-bg);
+    border-color: var(--danger-border);
 }
 
 
-/* GENERAL SECTION */
+/* ---------- GENERAL SECTION ---------- */
 
 .section {
     padding: 100px 7%;
@@ -297,13 +473,13 @@ nav a.active {
 .section-heading {
     text-align: center;
     max-width: 700px;
-    margin: auto auto 55px;
+    margin: 0 auto 55px;
 }
 
 .section-heading span,
 .about-content > span,
 .appointment-cta span {
-    color: var(--primary);
+    color: var(--primary-text);
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 2px;
@@ -311,7 +487,7 @@ nav a.active {
 
 .section-heading h2,
 .about-content h2 {
-    font-size: 40px;
+    font-size: clamp(1.9rem, 4vw, 2.5rem);
     line-height: 1.2;
     margin: 12px 0;
 }
@@ -321,7 +497,7 @@ nav a.active {
 }
 
 
-/* SERVICES */
+/* ---------- SERVICES ---------- */
 
 .services-grid {
     display: grid;
@@ -331,18 +507,20 @@ nav a.active {
 
 .service-card {
     padding: 30px;
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 15px;
-    transition: .3s;
+    border-radius: var(--radius);
+    transition: transform .3s, box-shadow .3s;
 }
 
 .service-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0,0,0,.08);
+    box-shadow: 0 20px 40px var(--shadow);
 }
 
 .service-icon {
     font-size: 40px;
+    line-height: 1;
     margin-bottom: 20px;
 }
 
@@ -356,17 +534,25 @@ nav a.active {
     margin-bottom: 20px;
 }
 
-.service-card a {
-    color: var(--primary);
+.service-card a,
+.doctor-profile a,
+.article-content a {
+    color: var(--primary-text);
     font-size: 13px;
     font-weight: 700;
 }
 
+.service-card a:hover,
+.doctor-profile a:hover,
+.article-content a:hover {
+    text-decoration: underline;
+}
 
-/* ABOUT */
+
+/* ---------- ABOUT ---------- */
 
 .about-section {
-    background: var(--light);
+    background: var(--soft);
     padding: 100px 7%;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -381,11 +567,7 @@ nav a.active {
 .image-placeholder {
     height: 100%;
     min-height: 450px;
-    background: linear-gradient(
-        135deg,
-        #c5eff1,
-        #eafafb
-    );
+    background: linear-gradient(135deg, var(--visual-a), var(--visual-b));
     border-radius: 25px;
     display: flex;
     align-items: center;
@@ -404,13 +586,18 @@ nav a.active {
     margin-bottom: 30px;
 }
 
-.check-list div {
+.check-list li {                 /* was `div` before the <ul> fix */
     font-weight: 600;
     font-size: 14px;
 }
 
+.check-list li span {
+    color: var(--primary-text);
+    margin-right: 6px;
+}
 
-/* DOCTORS */
+
+/* ---------- DOCTORS ---------- */
 
 .doctors-grid {
     display: grid;
@@ -421,14 +608,15 @@ nav a.active {
 .doctor-profile {
     text-align: center;
     padding: 30px;
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 15px;
+    border-radius: var(--radius);
 }
 
 .doctor-photo {
     height: 250px;
-    background: var(--light);
-    border-radius: 15px;
+    background: var(--tile);
+    border-radius: var(--radius);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -437,7 +625,7 @@ nav a.active {
 }
 
 .doctor-profile p {
-    color: var(--primary);
+    color: var(--primary-text);
     font-weight: 600;
 }
 
@@ -445,30 +633,27 @@ nav a.active {
     display: block;
     font-size: 12px;
     color: var(--text);
-    margin: 10px;
+    margin: 10px 0;
 }
 
 .doctor-profile a {
     display: inline-block;
     margin-top: 10px;
-    color: var(--primary);
-    font-size: 13px;
-    font-weight: 700;
 }
 
 
-/* CTA */
+/* ---------- CTA ---------- */
 
 .appointment-cta {
     margin: 0 7%;
     padding: 60px;
     border-radius: 25px;
     background: var(--primary);
-    color: white;
-
+    color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 30px;
 }
 
 .appointment-cta span {
@@ -476,24 +661,16 @@ nav a.active {
 }
 
 .appointment-cta h2 {
-    font-size: 35px;
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
     margin: 10px 0;
 }
 
 .appointment-cta p {
-    opacity: .85;
-}
-
-.white-btn {
-    background: white;
-    color: var(--primary);
-    padding: 15px 25px;
-    border-radius: 8px;
-    font-weight: 700;
+    opacity: .9;
 }
 
 
-/* TESTIMONIALS */
+/* ---------- TESTIMONIALS ---------- */
 
 .testimonial-grid {
     display: grid;
@@ -503,13 +680,14 @@ nav a.active {
 
 .testimonial {
     padding: 30px;
-    background: var(--light);
-    border-radius: 15px;
+    background: var(--soft);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
 }
 
 .stars {
-    color: #f2b01e;
     margin-bottom: 15px;
+    letter-spacing: 2px;
 }
 
 .testimonial p {
@@ -517,8 +695,12 @@ nav a.active {
     margin-bottom: 20px;
 }
 
+.testimonial figcaption {
+    color: var(--heading);
+}
 
-/* ARTICLES */
+
+/* ---------- ARTICLES ---------- */
 
 .article-grid {
     display: grid;
@@ -527,14 +709,21 @@ nav a.active {
 }
 
 .article-grid article {
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 15px;
+    border-radius: var(--radius);
     overflow: hidden;
+    transition: transform .3s, box-shadow .3s;
+}
+
+.article-grid article:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px var(--shadow);
 }
 
 .article-image {
     height: 180px;
-    background: var(--light);
+    background: var(--tile);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -546,7 +735,7 @@ nav a.active {
 }
 
 .article-content small {
-    color: var(--primary);
+    color: var(--primary-text);
     font-weight: 700;
 }
 
@@ -560,18 +749,12 @@ nav a.active {
     margin-bottom: 15px;
 }
 
-.article-content a {
-    color: var(--primary);
-    font-weight: 700;
-    font-size: 13px;
-}
 
-
-/* FOOTER */
+/* ---------- FOOTER ---------- */
 
 footer {
     background: #092536;
-    color: white;
+    color: #fff;
     padding: 70px 7% 20px;
 }
 
@@ -585,17 +768,30 @@ footer {
     margin-bottom: 20px;
 }
 
-.footer-grid > div > a {
+/* Link columns are now <nav> elements, so target them directly */
+.footer-grid nav a {
     display: block;
     color: #b9ced8;
     margin-bottom: 10px;
     font-size: 14px;
 }
 
+.footer-grid nav a:hover,
+.footer-grid address a:hover,
+.copyright a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
 .footer-grid p {
     color: #b9ced8;
     font-size: 14px;
     margin: 10px 0;
+}
+
+.footer-grid address a,
+.copyright a {
+    color: inherit;
 }
 
 .socials {
@@ -605,89 +801,84 @@ footer {
 }
 
 .socials a {
-    color: white;
+    color: #fff;
+    font-size: 14px;
+}
+
+.socials a:hover {
+    text-decoration: underline;
 }
 
 .copyright {
-    border-top: 1px solid rgba(255,255,255,.1);
+    border-top: 1px solid rgba(255, 255, 255, .1);
     margin-top: 50px;
     padding-top: 20px;
-
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 14px;
+    color: #b9ced8;
 }
 
 
-/* FLOATING EMERGENCY */
+/* ---------- FLOATING EMERGENCY ---------- */
 
 .emergency-floating {
     position: fixed;
     right: 25px;
     bottom: 25px;
-
-    background: #d62828;
-    color: white;
-
+    background: var(--danger);
+    color: #fff;
     padding: 14px 20px;
     border-radius: 50px;
-
     font-weight: 700;
-
-    box-shadow: 0 10px 30px rgba(0,0,0,.2);
-
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
     z-index: 2000;
+    transition: background-color .2s, transform .2s;
+}
+
+.emergency-floating:hover {
+    background: var(--danger-hover);
+    transform: translateY(-2px);
 }
 
 
-/* DARK MODE */
-
-body.dark {
-    background: #071923;
-    color: white;
-}
-
-body.dark .navbar {
-    background: #0c2530;
-}
-
-body.dark .service-card,
-body.dark .doctor-profile,
-body.dark .quick-card,
-body.dark .article-grid article {
-    background: #0c2530;
-    border-color: #183b47;
-}
-
-body.dark .section-heading p,
-body.dark .service-card p,
-body.dark .doctor-profile span,
-body.dark .article-content p {
-    color: #b8cbd1;
-}
-
-body.dark .quick-services {
-    background: #071923;
-}
-
-body.dark .about-section {
-    background: #0c2530;
-}
-
-body.dark .hero {
-    background: #0c2530;
-}
-
-body.dark .doctor-card {
-    background: #102f3b;
-}
-
-
-/* RESPONSIVE */
+/* ---------- RESPONSIVE ---------- */
 
 @media (max-width: 1000px) {
 
-    nav {
+    /* Mobile menu: the old rule hid the nav with no way to reopen it */
+    .menu-toggle {
+        display: block;
+    }
+
+    .navbar nav {
         display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        padding: 8px 7% 16px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 20px 30px var(--shadow);
+    }
+
+    .navbar nav.open {
+        display: flex;
+    }
+
+    .navbar nav a {
+        padding: 14px 0;
+        font-size: 16px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .navbar nav a:last-child {
+        border-bottom: none;
     }
 
     .hero,
@@ -695,17 +886,15 @@ body.dark .doctor-card {
         grid-template-columns: 1fr;
     }
 
+    .about-section {
+        gap: 50px;
+    }
+
     .services-grid,
     .doctors-grid,
     .testimonial-grid,
-    .article-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .quick-services {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
+    .article-grid,
+    .quick-services,
     .footer-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -722,6 +911,10 @@ body.dark .doctor-card {
         padding: 0 5%;
     }
 
+    .navbar nav {
+        padding: 8px 5% 16px;
+    }
+
     .appointment-btn {
         display: none;
     }
@@ -730,12 +923,8 @@ body.dark .doctor-card {
         padding: 60px 5%;
     }
 
-    .hero h1 {
-        font-size: 45px;
-    }
-
-    .hero-features {
-        gap: 20px;
+    .hero-image {
+        min-height: 320px;
     }
 
     .quick-services,
@@ -752,15 +941,24 @@ body.dark .doctor-card {
         padding: 70px 5%;
     }
 
+    .image-placeholder {
+        min-height: 300px;
+        font-size: 100px;
+    }
+
     .appointment-cta {
         margin: 0 5%;
         padding: 35px;
         flex-direction: column;
         align-items: flex-start;
-        gap: 25px;
     }
 
     .copyright {
         flex-direction: column;
+    }
+
+    .emergency-floating {
+        right: 15px;
+        bottom: 15px;
     }
 }
