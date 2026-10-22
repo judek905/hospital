@@ -3,26 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a7cff">
 
-    <title>CarePlus Hospital | Quality Healthcare</title>
+    <title>CarePlus Hospital | Quality Healthcare in Kampala</title>
+    <meta name="description" content="CarePlus Hospital in Kampala offers 24/7 emergency care, cardiology, neurology, pediatrics, dental care and laboratory services. Book an appointment online.">
+
+    <!-- Social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CarePlus Hospital | Your Health. Our Priority.">
+    <meta property="og:description" content="Compassionate, professional and affordable healthcare in Kampala.">
+
+    <!-- Favicon (inline SVG, no extra request) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a7cff'/%3E%3Cpath d='M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z' fill='white'/%3E%3C/svg%3E">
+
+    <!-- Fonts: preconnect to both hosts, display=swap avoids invisible text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Removed: Font Awesome kit script. It was unused (icons are emoji),
+         render-blocking, and the kit ID was the public demo one. -->
 
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Structured data helps Google show hospital details -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Hospital",
+        "name": "CarePlus Hospital",
+        "telephone": "+256700000000",
+        "email": "info@careplushospital.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "Kampala", "addressCountry": "UG" },
+        "openingHours": "Mo-Su 00:00-23:59"
+    }
+    </script>
+
+    <style>
+        /* Accessibility helpers (move into css/style.css if you prefer) */
+        .skip-link{position:absolute;left:-9999px;top:0;z-index:1000;background:#fff;color:#000;padding:.75rem 1rem;border-radius:0 0 .5rem 0}
+        .skip-link:focus{left:0}
+        .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+        :focus-visible{outline:3px solid #0a7cff;outline-offset:2px}
+        a.quick-card{color:inherit;text-decoration:none}
+        @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+    </style>
 </head>
 
 <body>
 
+<a href="#main" class="skip-link">Skip to main content</a>
+
 <!-- TOP BAR -->
 <div class="topbar">
     <div>
-        <span> Emergency: +256 700 000 000</span>
-        <span> info@careplushospital.com</span>
+        <a href="tel:+256700000000"><span aria-hidden="true">📞</span> Emergency: +256 700 000 000</a>
+        <a href="mailto:info@careplushospital.com"><span aria-hidden="true">✉️</span> info@careplushospital.com</a>
     </div>
-
     <div>
         <span>24/7 Emergency Care</span>
     </div>
@@ -32,16 +69,16 @@
 <!-- NAVIGATION -->
 <header class="navbar">
 
-    <div class="logo">
-        <div class="logo-icon">+</div>
+    <a class="logo" href="index.html" aria-label="CarePlus Hospital home">
+        <div class="logo-icon" aria-hidden="true">+</div>
         <div>
             <strong>CarePlus</strong>
             <small>HOSPITAL</small>
         </div>
-    </div>
+    </a>
 
-    <nav>
-        <a href="index.html" class="active">Home</a>
+    <nav aria-label="Main navigation">
+        <a href="index.html" class="active" aria-current="page">Home</a>
         <a href="about.html">About</a>
         <a href="services.html">Services</a>
         <a href="doctors.html">Doctors</a>
@@ -50,25 +87,25 @@
     </nav>
 
     <div class="nav-buttons">
-        <button class="theme-btn" onclick="toggleDarkMode()">🌙</button>
-        <a href="appointment.html" class="appointment-btn">
-            Book Appointment
-        </a>
+        <button type="button" class="theme-btn" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
+            <span aria-hidden="true">🌙</span>
+        </button>
+        <a href="appointment.html" class="appointment-btn">Book Appointment</a>
     </div>
 
 </header>
 
 
+<main id="main">
+
 <!-- HERO -->
-<section class="hero">
+<section class="hero" aria-labelledby="hero-title">
 
     <div class="hero-content">
 
-        <span class="hero-label">
-             Trusted Healthcare Since 1998
-        </span>
+        <span class="hero-label">Trusted Healthcare Since 1998</span>
 
-        <h1>
+        <h1 id="hero-title">
             Your Health.<br>
             <span>Our Priority.</span>
         </h1>
@@ -80,224 +117,137 @@
         </p>
 
         <div class="hero-buttons">
-
-            <a href="appointment.html" class="primary-btn">
-                Book Consultation →
-            </a>
-
-            <a href="services.html" class="secondary-btn">
-                Explore Services
-            </a>
-
+            <a href="appointment.html" class="primary-btn">Book Consultation <span aria-hidden="true">→</span></a>
+            <a href="services.html" class="secondary-btn">Explore Services</a>
         </div>
 
-        <div class="hero-features">
-
+        <!-- Stats as a description list: semantic and screen-reader friendly -->
+        <dl class="hero-features">
             <div>
-                <strong>25+</strong>
-                <span>Years Experience</span>
+                <dt class="visually-hidden">Years of experience</dt>
+                <dd><strong>25+</strong> <span>Years Experience</span></dd>
             </div>
-
             <div>
-                <strong>100+</strong>
-                <span>Medical Experts</span>
+                <dt class="visually-hidden">Medical experts</dt>
+                <dd><strong>100+</strong> <span>Medical Experts</span></dd>
             </div>
-
             <div>
-                <strong>50K+</strong>
-                <span>Patients Served</span>
+                <dt class="visually-hidden">Patients served</dt>
+                <dd><strong>50K+</strong> <span>Patients Served</span></dd>
             </div>
-
-        </div>
+        </dl>
 
     </div>
 
     <div class="hero-image">
-
         <div class="doctor-card">
-
-            <div class="doctor-avatar">
-                
-            </div>
-
+            <div class="doctor-avatar" aria-hidden="true">👨‍⚕️</div>
             <div>
                 <strong>24/7 Medical Support</strong>
                 <p>We're here when you need us.</p>
             </div>
-
         </div>
-
     </div>
 
 </section>
 
 
-<!-- QUICK SERVICES -->
-<section class="quick-services">
+<!-- QUICK SERVICES: whole card is now a real link -->
+<section class="quick-services" aria-label="Quick actions">
 
-    <div class="quick-card emergency">
-        <span></span>
+    <a class="quick-card emergency" href="tel:+256700000000">
+        <span aria-hidden="true">🚑</span>
         <div>
-            <h3>Emergency Care</h3>
+            <h2>Emergency Care</h2>
             <p>Available 24 hours</p>
         </div>
-    </div>
+    </a>
 
-    <div class="quick-card">
-        <span></span>
+    <a class="quick-card" href="appointment.html">
+        <span aria-hidden="true">📅</span>
         <div>
-            <h3>Book Appointment</h3>
+            <h2>Book Appointment</h2>
             <p>Schedule your visit</p>
         </div>
-    </div>
+    </a>
 
-    <div class="quick-card">
-        <span></span>
+    <a class="quick-card" href="contact.html">
+        <span aria-hidden="true">💻</span>
         <div>
-            <h3>Online Consultation</h3>
+            <h2>Online Consultation</h2>
             <p>Talk to a doctor online</p>
         </div>
-    </div>
+    </a>
 
-    <div class="quick-card">
-        <span></span>
+    <a class="quick-card" href="tel:+256700000000">
+        <span aria-hidden="true">📞</span>
         <div>
-            <h3>Call Us</h3>
+            <h2>Call Us</h2>
             <p>+256 700 000 000</p>
         </div>
-    </div>
+    </a>
 
 </section>
 
 
 <!-- SERVICES -->
-<section class="section">
+<section class="section" aria-labelledby="services-title">
 
     <div class="section-heading">
-
         <span>OUR SERVICES</span>
-
-        <h2>
+        <h2 id="services-title">
             Comprehensive Healthcare<br>
-            For You & Your Family
+            For You &amp; Your Family
         </h2>
-
         <p>
             From preventive care to advanced treatment,
             our medical team is ready to support your health.
         </p>
-
     </div>
-
 
     <div class="services-grid">
 
-        <div class="service-card">
-
-            <div class="service-icon"></div>
-
+        <article class="service-card">
+            <div class="service-icon" aria-hidden="true">🩺</div>
             <h3>General Consultation</h3>
+            <p>Professional medical consultation, diagnosis and treatment.</p>
+            <a href="services.html#consultation" aria-label="Learn more about General Consultation">Learn More <span aria-hidden="true">→</span></a>
+        </article>
 
-            <p>
-                Professional medical consultation,
-                diagnosis and treatment.
-            </p>
-
-            <a href="services.html">
-                Learn More →
-            </a>
-
-        </div>
-
-
-        <div class="service-card">
-
-            <div class="service-icon"></div>
-
+        <article class="service-card">
+            <div class="service-icon" aria-hidden="true">❤️</div>
             <h3>Cardiology</h3>
+            <p>Comprehensive heart and cardiovascular care from experienced specialists.</p>
+            <a href="services.html#cardiology" aria-label="Learn more about Cardiology">Learn More <span aria-hidden="true">→</span></a>
+        </article>
 
-            <p>
-                Comprehensive heart and cardiovascular
-                care from experienced specialists.
-            </p>
-
-            <a href="services.html">
-                Learn More →
-            </a>
-
-        </div>
-
-
-        <div class="service-card">
-
-            <div class="service-icon"></div>
-
+        <article class="service-card">
+            <div class="service-icon" aria-hidden="true">🧠</div>
             <h3>Neurology</h3>
+            <p>Advanced diagnosis and treatment of neurological conditions.</p>
+            <a href="services.html#neurology" aria-label="Learn more about Neurology">Learn More <span aria-hidden="true">→</span></a>
+        </article>
 
-            <p>
-                Advanced diagnosis and treatment of
-                neurological conditions.
-            </p>
-
-            <a href="services.html">
-                Learn More →
-            </a>
-
-        </div>
-
-
-        <div class="service-card">
-
-            <div class="service-icon"></div>
-
+        <article class="service-card">
+            <div class="service-icon" aria-hidden="true">👶</div>
             <h3>Pediatrics</h3>
+            <p>Specialized healthcare for babies, children and adolescents.</p>
+            <a href="services.html#pediatrics" aria-label="Learn more about Pediatrics">Learn More <span aria-hidden="true">→</span></a>
+        </article>
 
-            <p>
-                Specialized healthcare for babies,
-                children and adolescents.
-            </p>
-
-            <a href="services.html">
-                Learn More →
-            </a>
-
-        </div>
-
-
-        <div class="service-card">
-
-            <div class="service-icon"></div>
-
+        <article class="service-card">
+            <div class="service-icon" aria-hidden="true">🦷</div>
             <h3>Dental Care</h3>
+            <p>Complete dental examination, treatment and preventive care.</p>
+            <a href="services.html#dental" aria-label="Learn more about Dental Care">Learn More <span aria-hidden="true">→</span></a>
+        </article>
 
-            <p>
-                Complete dental examination,
-                treatment and preventive care.
-            </p>
-
-            <a href="services.html">
-                Learn More →
-            </a>
-
-        </div>
-
-
-        <div class="service-card">
-
-            <div class="service-icon"></div>
-
+        <article class="service-card">
+            <div class="service-icon" aria-hidden="true">🔬</div>
             <h3>Laboratory</h3>
-
-            <p>
-                Accurate laboratory testing using
-                modern diagnostic equipment.
-            </p>
-
-            <a href="services.html">
-                Learn More →
-            </a>
-
-        </div>
+            <p>Accurate laboratory testing using modern diagnostic equipment.</p>
+            <a href="services.html#laboratory" aria-label="Learn more about Laboratory services">Learn More <span aria-hidden="true">→</span></a>
+        </article>
 
     </div>
 
@@ -305,21 +255,16 @@
 
 
 <!-- ABOUT -->
-<section class="about-section">
+<section class="about-section" aria-labelledby="about-title">
 
     <div class="about-image">
-        <div class="image-placeholder">
-            
-        </div>
+        <div class="image-placeholder" role="img" aria-label="CarePlus Hospital building and staff">🏥</div>
     </div>
 
     <div class="about-content">
 
         <span>WHY CHOOSE CAREPLUS?</span>
-
-        <h2>
-            Healthcare Built Around You
-        </h2>
+        <h2 id="about-title">Healthcare Built Around You</h2>
 
         <p>
             At CarePlus Hospital, we combine experienced
@@ -328,33 +273,15 @@
             experience for every patient.
         </p>
 
-        <div class="check-list">
+        <ul class="check-list">
+            <li><span aria-hidden="true">✓</span> Experienced medical professionals</li>
+            <li><span aria-hidden="true">✓</span> Modern medical equipment</li>
+            <li><span aria-hidden="true">✓</span> 24/7 emergency services</li>
+            <li><span aria-hidden="true">✓</span> Affordable healthcare</li>
+            <li><span aria-hidden="true">✓</span> Patient-centered treatment</li>
+        </ul>
 
-            <div>
-                ✓ Experienced medical professionals
-            </div>
-
-            <div>
-                ✓ Modern medical equipment
-            </div>
-
-            <div>
-                ✓ 24/7 emergency services
-            </div>
-
-            <div>
-                ✓ Affordable healthcare
-            </div>
-
-            <div>
-                ✓ Patient-centered treatment
-            </div>
-
-        </div>
-
-        <a href="about.html" class="primary-btn">
-            Learn More About Us
-        </a>
+        <a href="about.html" class="primary-btn">Learn More About Us</a>
 
     </div>
 
@@ -362,81 +289,39 @@
 
 
 <!-- DOCTORS -->
-<section class="section">
+<section class="section" aria-labelledby="doctors-title">
 
     <div class="section-heading">
-
         <span>OUR MEDICAL TEAM</span>
-
-        <h2>
-            Meet Our Specialists
-        </h2>
-
-        <p>
-            Experienced professionals dedicated to
-            providing quality healthcare.
-        </p>
-
+        <h2 id="doctors-title">Meet Our Specialists</h2>
+        <p>Experienced professionals dedicated to providing quality healthcare.</p>
     </div>
-
 
     <div class="doctors-grid">
 
-        <div class="doctor-profile">
-
-            <div class="doctor-photo">
-                
-            </div>
-
+        <article class="doctor-profile">
+            <div class="doctor-photo" aria-hidden="true">👨‍⚕️</div>
             <h3>Dr. James Carter</h3>
-
             <p>Cardiologist</p>
-
             <span>15+ Years Experience</span>
+            <a href="appointment.html?doctor=carter" aria-label="Book a consultation with Dr. James Carter">Book Consultation</a>
+        </article>
 
-            <a href="appointment.html">
-                Book Consultation
-            </a>
-
-        </div>
-
-
-        <div class="doctor-profile">
-
-            <div class="doctor-photo">
-                👩‍⚕️
-            </div>
-
+        <article class="doctor-profile">
+            <div class="doctor-photo" aria-hidden="true">👩‍⚕️</div>
             <h3>Dr. Sarah Williams</h3>
-
             <p>Pediatrician</p>
-
             <span>12+ Years Experience</span>
+            <a href="appointment.html?doctor=williams" aria-label="Book a consultation with Dr. Sarah Williams">Book Consultation</a>
+        </article>
 
-            <a href="appointment.html">
-                Book Consultation
-            </a>
-
-        </div>
-
-
-        <div class="doctor-profile">
-
-            <div class="doctor-photo">
-                
-            </div>
-
+        <article class="doctor-profile">
+            <div class="doctor-photo" aria-hidden="true">👨‍⚕️</div>
             <h3>Dr. Michael Brown</h3>
-
             <p>Neurologist</p>
-
             <span>18+ Years Experience</span>
-
-            <a href="appointment.html">
-                Book Consultation
-            </a>
-
-        </div>
+            <a href="appointment.html?doctor=brown" aria-label="Book a consultation with Dr. Michael Brown">Book Consultation</a>
+        </article>
 
     </div>
 
@@ -444,92 +329,49 @@
 
 
 <!-- APPOINTMENT CTA -->
-<section class="appointment-cta">
-
+<section class="appointment-cta" aria-labelledby="cta-title">
     <div>
-
         <span>NEED MEDICAL HELP?</span>
-
-        <h2>
-            Book a Consultation With Our Doctors
-        </h2>
-
-        <p>
-            Choose your preferred doctor, service and
-            convenient appointment time.
-        </p>
-
+        <h2 id="cta-title">Book a Consultation With Our Doctors</h2>
+        <p>Choose your preferred doctor, service and convenient appointment time.</p>
     </div>
-
-    <a href="appointment.html" class="white-btn">
-        Book Appointment →
-    </a>
-
+    <a href="appointment.html" class="white-btn">Book Appointment <span aria-hidden="true">→</span></a>
 </section>
 
 
 <!-- TESTIMONIALS -->
-<section class="section">
+<section class="section" aria-labelledby="testimonials-title">
 
     <div class="section-heading">
-
         <span>PATIENT EXPERIENCES</span>
-
-        <h2>
-            What Our Patients Say
-        </h2>
-
+        <h2 id="testimonials-title">What Our Patients Say</h2>
     </div>
-
 
     <div class="testimonial-grid">
 
-        <div class="testimonial">
+        <figure class="testimonial">
+            <div class="stars" role="img" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+            <blockquote>
+                <p>"The doctors and nurses were very professional and caring. I received excellent treatment."</p>
+            </blockquote>
+            <figcaption><strong>— Sarah K.</strong></figcaption>
+        </figure>
 
-            <div class="stars">
-                
-            </div>
+        <figure class="testimonial">
+            <div class="stars" role="img" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+            <blockquote>
+                <p>"Booking my appointment was simple and the staff made my experience comfortable."</p>
+            </blockquote>
+            <figcaption><strong>— Daniel M.</strong></figcaption>
+        </figure>
 
-            <p>
-                "The doctors and nurses were very professional
-                and caring. I received excellent treatment."
-            </p>
-
-            <strong>— Sarah K.</strong>
-
-        </div>
-
-
-        <div class="testimonial">
-
-            <div class="stars">
-            
-            </div>
-
-            <p>
-                "Booking my appointment was simple and the
-                staff made my experience comfortable."
-            </p>
-
-            <strong>— Daniel M.</strong>
-
-        </div>
-
-
-        <div class="testimonial">
-
-            <div class="stars">
-                
-            </div>
-
-            <p>
-                "A modern hospital with friendly staff and
-                excellent healthcare services."
-            </p>
-
-            <strong>— Grace A.</strong>
-
-        </div>
+        <figure class="testimonial">
+            <div class="stars" role="img" aria-label="5 out of 5 stars">⭐⭐⭐⭐⭐</div>
+            <blockquote>
+                <p>"A modern hospital with friendly staff and excellent healthcare services."</p>
+            </blockquote>
+            <figcaption><strong>— Grace A.</strong></figcaption>
+        </figure>
 
     </div>
 
@@ -537,107 +379,50 @@
 
 
 <!-- HEALTH ARTICLES -->
-<section class="section articles">
+<section class="section articles" aria-labelledby="articles-title">
 
     <div class="section-heading">
-
-        <span>HEALTH & WELLNESS</span>
-
-        <h2>
-            Latest Health Information
-        </h2>
-
+        <span>HEALTH &amp; WELLNESS</span>
+        <h2 id="articles-title">Latest Health Information</h2>
     </div>
-
 
     <div class="article-grid">
 
         <article>
-
-            <div class="article-image">
-                
-            </div>
-
+            <div class="article-image" aria-hidden="true">🥗</div>
             <div class="article-content">
-
                 <small>HEALTH TIPS</small>
-
-                <h3>
-                    Simple Ways to Improve Your Health
-                </h3>
-
-                <p>
-                    Learn practical habits that can support
-                    a healthier lifestyle.
-                </p>
-
-                <a href="#">
-                    Read Article →
-                </a>
-
+                <h3>Simple Ways to Improve Your Health</h3>
+                <p>Learn practical habits that can support a healthier lifestyle.</p>
+                <a href="#" aria-label="Read article: Simple Ways to Improve Your Health">Read Article <span aria-hidden="true">→</span></a>
             </div>
-
         </article>
 
-
         <article>
-
-            <div class="article-image">
-                
-            </div>
-
+            <div class="article-image" aria-hidden="true">🏃</div>
             <div class="article-content">
-
                 <small>FITNESS</small>
-
-                <h3>
-                    Why Regular Exercise Matters
-                </h3>
-
-                <p>
-                    Discover how regular physical activity
-                    supports overall wellbeing.
-                </p>
-
-                <a href="#">
-                    Read Article →
-                </a>
-
+                <h3>Why Regular Exercise Matters</h3>
+                <p>Discover how regular physical activity supports overall wellbeing.</p>
+                <a href="#" aria-label="Read article: Why Regular Exercise Matters">Read Article <span aria-hidden="true">→</span></a>
             </div>
-
         </article>
 
-
         <article>
-
-            <div class="article-image">
-                
-            </div>
-
+            <div class="article-image" aria-hidden="true">😴</div>
             <div class="article-content">
-
                 <small>WELLNESS</small>
-
-                <h3>
-                    The Importance of Quality Sleep
-                </h3>
-
-                <p>
-                    Understand why good sleep is important
-                    for your body and mind.
-                </p>
-
-                <a href="#">
-                    Read Article →
-                </a>
-
+                <h3>The Importance of Quality Sleep</h3>
+                <p>Understand why good sleep is important for your body and mind.</p>
+                <a href="#" aria-label="Read article: The Importance of Quality Sleep">Read Article <span aria-hidden="true">→</span></a>
             </div>
-
         </article>
 
     </div>
 
 </section>
+
+</main>
 
 
 <!-- FOOTER -->
@@ -646,93 +431,70 @@
     <div class="footer-grid">
 
         <div>
-
-            <div class="logo footer-logo">
-
-                <div class="logo-icon">+</div>
-
+            <a class="logo footer-logo" href="index.html" aria-label="CarePlus Hospital home">
+                <div class="logo-icon" aria-hidden="true">+</div>
                 <div>
                     <strong>CarePlus</strong>
                     <small>HOSPITAL</small>
                 </div>
+            </a>
 
-            </div>
-
-            <p>
-                Quality healthcare delivered with
-                compassion, professionalism and technology.
-            </p>
+            <p>Quality healthcare delivered with compassion, professionalism and technology.</p>
 
             <div class="socials">
-                <a href="#">Facebook</a>
-                <a href="#">Instagram</a>
-                <a href="#">X</a>
+                <!-- Replace # with your real profile URLs -->
+                <a href="#" aria-label="CarePlus on Facebook">Facebook</a>
+                <a href="#" aria-label="CarePlus on Instagram">Instagram</a>
+                <a href="#" aria-label="CarePlus on X (Twitter)">X</a>
             </div>
-
         </div>
 
-
-        <div>
-
+        <nav aria-label="Quick links">
             <h3>Quick Links</h3>
-
             <a href="about.html">About Us</a>
             <a href="services.html">Services</a>
             <a href="doctors.html">Doctors</a>
             <a href="departments.html">Departments</a>
+        </nav>
 
-        </div>
-
-
-        <div>
-
+        <nav aria-label="Patient services">
             <h3>Patient Services</h3>
-
             <a href="appointment.html">Book Appointment</a>
             <a href="#">Patient Portal</a>
             <a href="#">Insurance</a>
             <a href="#">Health Records</a>
+        </nav>
 
-        </div>
-
-
-        <div>
-
+        <address>
             <h3>Contact</h3>
-
-            <p> Kampala, Uganda</p>
-            <p> +256 700 000 000</p>
-            <p> info@careplushospital.com</p>
-            <p> Open 24/7</p>
-
-        </div>
+            <p><span aria-hidden="true">📍</span> Kampala, Uganda</p>
+            <p><span aria-hidden="true">📞</span> <a href="tel:+256700000000">+256 700 000 000</a></p>
+            <p><span aria-hidden="true">✉️</span> <a href="mailto:info@careplushospital.com">info@careplushospital.com</a></p>
+            <p><span aria-hidden="true">🕒</span> Open 24/7</p>
+        </address>
 
     </div>
 
 
     <div class="copyright">
-
-        <p>
-            © 2026 CarePlus Hospital. All Rights Reserved.
-        </p>
-
-        <p>
-            Privacy Policy | Terms of Service
-        </p>
-
+        <p>&copy; <span id="year">2026</span> CarePlus Hospital. All Rights Reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
     </div>
 
 </footer>
 
 
 <!-- FLOATING EMERGENCY BUTTON -->
-
-<a href="tel:+256700000000" class="emergency-floating">
-     Emergency
+<a href="tel:+256700000000" class="emergency-floating" aria-label="Call emergency line">
+    <span aria-hidden="true">🚨</span> Emergency
 </a>
 
 
-<script src="js/script.js"></script>
+<script src="js/script.js" defer></script>
+<script defer>
+    // Keep the copyright year current
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>
