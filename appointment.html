@@ -1,283 +1,129 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Book Appointment | CarePlus Hospital</title>
-
-    <link rel="stylesheet" href="css/style.css">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0868d9">
+<title>Book an Appointment | CarePlus Hospital</title>
+<meta name="description" content="Book a consultation at CarePlus Hospital in Kampala. Choose a department, doctor and time, and our team will confirm by phone or email.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230868d9'/%3E%3Cpath d='M13 7h6v6h6v6h-6v6h-6v-6H7v-6h6z' fill='white'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
+<a href="#main" class="skip-link">Skip to main content</a>
 
 <header class="navbar">
-
-    <div class="logo">
-
-        <div class="logo-icon">+</div>
-
-        <div>
-            <strong>CarePlus</strong>
-            <small>HOSPITAL</small>
-        </div>
-
-    </div>
-
-    <nav>
-
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="doctors.html">Doctors</a>
-        <a href="contact.html">Contact</a>
-
-    </nav>
-
+  <a class="logo" href="index.html" aria-label="CarePlus Hospital home">
+    <div class="logo-icon" aria-hidden="true">+</div>
+    <div><strong>CarePlus</strong><small>Hospital</small></div>
+  </a>
+  <nav id="site-nav" aria-label="Main navigation">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="doctors.html">Doctors</a>
+    <a href="departments.html">Departments</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="nav-buttons">
+    <button type="button" class="theme-btn" aria-label="Dark mode" aria-pressed="false"><span aria-hidden="true">🌙</span></button>
+    <a href="appointment.html" class="appointment-btn" aria-current="page">Book appointment</a>
+    <button type="button" class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span aria-hidden="true">☰</span></button>
+  </div>
 </header>
 
+<main id="main" class="section">
+  <div class="section-heading">
+    <h1 class="page-title">Book a consultation</h1>
+    <p>Fill in the form and our team will call or email you to confirm your appointment.</p>
+  </div>
 
-<section class="section">
-
-    <div class="section-heading">
-
-        <span>ONLINE APPOINTMENT</span>
-
-        <h2>Book a Medical Consultation</h2>
-
-        <p>
-            Complete the form below and our team will
-            contact you to confirm your appointment.
-        </p>
-
+  <div class="form-wrap">
+    <div class="notice success" id="sent" role="status" hidden>
+      <strong>Request received.</strong> Our team will contact you to confirm your appointment. <a href="index.html">Back to home</a>
     </div>
 
+    <div class="notice urgent">
+      <strong>Is this an emergency?</strong> Don't use this form. Call <a href="tel:+256700000000">+256 700 000 000</a> now.
+    </div>
 
-    <form
-        style="
-        max-width:800px;
-        margin:auto;
-        padding:40px;
-        border:1px solid #d9e8eb;
-        border-radius:20px;
-        "
-    >
+    <form id="appointment-form" class="form-card" name="appointment" method="POST" action="/appointment.html?sent=1" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="appointment">
+      <p class="hp" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-
-            <div>
-
-                <label>Full Name</label>
-
-                <input
-                    type="text"
-                    placeholder="Enter your name"
-                    required
-                    style="
-                    width:100%;
-                    padding:15px;
-                    margin-top:8px;
-                    border:1px solid #d9e8eb;
-                    border-radius:8px;
-                    "
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>Phone Number</label>
-
-                <input
-                    type="tel"
-                    placeholder="+256..."
-                    required
-                    style="
-                    width:100%;
-                    padding:15px;
-                    margin-top:8px;
-                    border:1px solid #d9e8eb;
-                    border-radius:8px;
-                    "
-                >
-
-            </div>
-
+      <div class="form-grid">
+        <div class="field">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
         </div>
+        <div class="field">
+          <label for="phone">Phone number</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+256 7…" required>
+        </div>
+      </div>
 
+      <div class="field">
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" autocomplete="email" required>
+      </div>
 
-        <br>
-
-
-        <label>Email Address</label>
-
-        <input
-            type="email"
-            placeholder="your@email.com"
-            required
-            style="
-            width:100%;
-            padding:15px;
-            margin-top:8px;
-            border:1px solid #d9e8eb;
-            border-radius:8px;
-            "
-        >
-
-
-        <br><br>
-
-
-        <label>Select Department</label>
-
-        <select
-            required
-            style="
-            width:100%;
-            padding:15px;
-            margin-top:8px;
-            border:1px solid #d9e8eb;
-            border-radius:8px;
-            "
-        >
-
+      <div class="form-grid">
+        <div class="field">
+          <label for="department">Department</label>
+          <select id="department" name="department" required>
             <option value="">Choose a department</option>
-
-            <option>General Medicine</option>
+            <option>General medicine</option>
             <option>Cardiology</option>
             <option>Pediatrics</option>
             <option>Neurology</option>
-            <option>Dental Care</option>
+            <option>Dental care</option>
             <option>Laboratory</option>
-
-        </select>
-
-
-        <br><br>
-
-
-        <label>Preferred Doctor</label>
-
-        <select
-            style="
-            width:100%;
-            padding:15px;
-            margin-top:8px;
-            border:1px solid #d9e8eb;
-            border-radius:8px;
-            "
-        >
-
-            <option>Select Doctor</option>
-
-            <option>Dr. James Carter</option>
-
-            <option>Dr. Sarah Williams</option>
-
-            <option>Dr. Michael Brown</option>
-
-        </select>
-
-
-        <br><br>
-
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-
-            <div>
-
-                <label>Appointment Date</label>
-
-                <input
-                    type="date"
-                    required
-                    style="
-                    width:100%;
-                    padding:15px;
-                    margin-top:8px;
-                    border:1px solid #d9e8eb;
-                    border-radius:8px;
-                    "
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>Preferred Time</label>
-
-                <input
-                    type="time"
-                    required
-                    style="
-                    width:100%;
-                    padding:15px;
-                    margin-top:8px;
-                    border:1px solid #d9e8eb;
-                    border-radius:8px;
-                    "
-                >
-
-            </div>
-
+          </select>
         </div>
+        <div class="field">
+          <label for="doctor">Preferred doctor <span class="hint">(optional)</span></label>
+          <select id="doctor" name="doctor">
+            <option value="">No preference</option>
+            <option value="carter">Dr. James Carter, Cardiologist</option>
+            <option value="williams">Dr. Sarah Williams, Pediatrician</option>
+            <option value="brown">Dr. Michael Brown, Neurologist</option>
+          </select>
+        </div>
+      </div>
 
+      <div class="form-grid">
+        <div class="field">
+          <label for="date">Preferred date</label>
+          <input id="date" name="date" type="date" required>
+        </div>
+        <div class="field">
+          <label for="time">Preferred time</label>
+          <input id="time" name="time" type="time" required>
+        </div>
+      </div>
 
-        <br>
+      <div class="field">
+        <label for="reason">Reason for visit <span class="hint">(optional)</span></label>
+        <textarea id="reason" name="reason" rows="4" maxlength="500" placeholder="A short description is enough. Please don't include test results or ID numbers."></textarea>
+      </div>
 
-
-        <label>Reason for Consultation</label>
-
-        <textarea
-            rows="5"
-            placeholder="Briefly describe your concern..."
-            style="
-            width:100%;
-            padding:15px;
-            margin-top:8px;
-            border:1px solid #d9e8eb;
-            border-radius:8px;
-            "
-        ></textarea>
-
-
-        <br><br>
-
-
-        <button
-            type="submit"
-            class="primary-btn"
-            style="border:none;cursor:pointer;"
-        >
-
-            Confirm Appointment →
-
-        </button>
-
+      <button type="submit" class="primary-btn">Request appointment</button>
+      <p class="hint form-note">We use your details only to arrange your appointment. Booking is confirmed once our team contacts you.</p>
     </form>
-
-</section>
-
+  </div>
+</main>
 
 <footer>
-
-    <div class="copyright">
-
-        <p>
-            © 2026 CarePlus Hospital
-        </p>
-
-    </div>
-
+  <div class="copyright">
+    <p>&copy; <span id="year">2026</span> CarePlus Hospital. All rights reserved.</p>
+    <p><a href="index.html">Home</a> | <a href="contact.html">Contact</a> | <a href="#">Privacy policy</a></p>
+  </div>
 </footer>
 
+<script src="js/script.js" defer></script>
 </body>
-
 </html>
